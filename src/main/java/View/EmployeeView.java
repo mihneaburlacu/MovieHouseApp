@@ -5,6 +5,7 @@ import Model.Movie;
 import Model.User;
 import Presenter.PAdministrator;
 import Presenter.PEmployee;
+import Presenter.PManager;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -256,37 +257,20 @@ public class EmployeeView extends JFrame implements IEmployee{
         deleteButton.setBounds(485, 365, 115, 29);
         contentPane.add(deleteButton);
 
-        JLabel viewLabel = new JLabel("View all movies sorted by type and by year:");
+        JLabel viewLabel = new JLabel("View all movies sorted by type and by year");
         viewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        viewLabel.setBounds(10, 447, 332, 22);
+        viewLabel.setBounds(10, 471, 332, 22);
         contentPane.add(viewLabel);
 
-        viewButton = new JButton("View");
+        viewButton = new JButton("View or filter");
         viewButton.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        viewButton.setBounds(485, 444, 115, 29);
+        viewButton.setBounds(443, 468, 156, 29);
         contentPane.add(viewButton);
 
-        JLabel lblFilterAllMovies = new JLabel("Filter all movies by:");
-        lblFilterAllMovies.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        lblFilterAllMovies.setBounds(10, 494, 164, 22);
-        contentPane.add(lblFilterAllMovies);
-
-        String[] stringChoices = new String[]{"TYPE", "CATEGORY", "YEAR"};
-        filterComboBox = new JComboBox<String>(stringChoices);
-        filterComboBox.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-        filterComboBox.setBounds(215, 497, 143, 21);
-        contentPane.add(filterComboBox);
-
-        filterButton = new JButton("Filter");
-        filterButton.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        filterButton.setBounds(485, 497, 115, 29);
-        contentPane.add(filterButton);
-
-        filterTextField = new JTextField();
-        filterTextField.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-        filterTextField.setBounds(368, 498, 107, 19);
-        contentPane.add(filterTextField);
-        filterTextField.setColumns(10);
+        JLabel lblOrFilter = new JLabel("Or filter all movies by type, category or year");
+        lblOrFilter.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+        lblOrFilter.setBounds(10, 506, 332, 22);
+        contentPane.add(lblOrFilter);
 
         this.employee = employee;
         setUsernameToInsertLabel(employee.getUsername());
@@ -330,9 +314,13 @@ public class EmployeeView extends JFrame implements IEmployee{
             }
         });
 
-        viewFunction();
-
-        filterFunction();
+        addViewButton(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ViewAndFilterView viewAndFilterView = new ViewAndFilterView();
+                viewAndFilterView.setVisible(true);
+            }
+        });
     }
 
     @Override
@@ -408,16 +396,6 @@ public class EmployeeView extends JFrame implements IEmployee{
     }
 
     @Override
-    public String getFilterFromComboBox() {
-        return filterComboBox.getSelectedItem().toString();
-    }
-
-    @Override
-    public String getFilterTextField() {
-        return filterTextField.getText();
-    }
-
-    @Override
     public void addCreateButton(ActionListener actionListener) {
         createButton.addActionListener(actionListener);
     }
@@ -438,16 +416,6 @@ public class EmployeeView extends JFrame implements IEmployee{
     }
 
     @Override
-    public void addViewButton(ActionListener actionListener) {
-        viewButton.addActionListener(actionListener);
-    }
-
-    @Override
-    public void addFilterButton(ActionListener actionListener) {
-        filterButton.addActionListener(actionListener);
-    }
-
-    @Override
     public void setUsernameToInsertLabel(String username) {
         insertUsernameLabel.setText(username);
     }
@@ -458,24 +426,8 @@ public class EmployeeView extends JFrame implements IEmployee{
     }
 
     @Override
-    public void filterFunction() {
-        addFilterButton(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AllView allMoviesView = new AllView(new PAdministrator(), pEmployee, "EMPLOYEE", "FILTER");
-                allMoviesView.setVisible(true);
-            }
-        });
+    public void addViewButton(ActionListener actionListener) {
+        viewButton.addActionListener(actionListener);
     }
 
-    @Override
-    public void viewFunction() {
-        addViewButton(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AllView allMoviesView = new AllView(new PAdministrator(), pEmployee, "EMPLOYEE", "VIEW");
-                allMoviesView.setVisible(true);
-            }
-        });
-    }
 }

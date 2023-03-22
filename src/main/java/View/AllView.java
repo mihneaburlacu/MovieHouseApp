@@ -4,6 +4,7 @@ import Model.Movie;
 import Model.User;
 import Presenter.PAdministrator;
 import Presenter.PEmployee;
+import Presenter.PManager;
 
 import java.awt.EventQueue;
 
@@ -31,7 +32,7 @@ public class AllView extends JFrame implements IAll {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    AllView frame = new AllView(new PAdministrator(), new PEmployee(), "ADMINISTRATOR", "");
+                    AllView frame = new AllView(new PAdministrator());
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -43,7 +44,7 @@ public class AllView extends JFrame implements IAll {
     /**
      * Create the frame.
      */
-    public AllView(PAdministrator pAdministrator, PEmployee pEmployee, String whoOpens, String whatToDo) {
+    public AllView(PAdministrator pAdministrator) {
         setTitle("View all");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 795, 460);
@@ -60,28 +61,28 @@ public class AllView extends JFrame implements IAll {
         table = new JTable();
         table.setModel(new DefaultTableModel(
                 new Object[][] {
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
+                        {"ID", "Name", "Username", "Password", "Role"},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
                 },
                 new String[] {
                         "ID", "Name", "Username", "Password", "Role", ""
@@ -93,38 +94,8 @@ public class AllView extends JFrame implements IAll {
 
         this.pAdministrator = pAdministrator;
         this.pAdministrator.setiAllUsers(this);
-        this.pEmployee = pEmployee;
-        this.pEmployee.setIAll(this);
-        this.whoOpens = whoOpens;
-        this.whatToDo = whatToDo;
 
-        viewAll(whatToDo);
-    }
-
-    public void viewAll(String name) {
-        if(this.whoOpens.equals("ADMINISTRATOR")) {
-            pAdministrator.viewAllUsers();
-            this.table.getModel().setValueAt("ID", 0, 0);
-            this.table.getModel().setValueAt("NAME", 0, 1);
-            this.table.getModel().setValueAt("USERNAME", 0, 2);
-            this.table.getModel().setValueAt("PASSWORD", 0, 3);
-            this.table.getModel().setValueAt("ROLE", 0, 4);
-            this.table.getModel().setValueAt("", 0, 5);
-        }
-        else if(this.whoOpens.equals("EMPLOYEE")) {
-            if(name.equals("VIEW")) {
-                pEmployee.viewAllMovies();
-            }
-            else {
-                pEmployee.filterMovies();
-            }
-            this.table.getModel().setValueAt("ID", 0, 0);
-            this.table.getModel().setValueAt("NAME", 0, 1);
-            this.table.getModel().setValueAt("TYPE", 0, 2);
-            this.table.getModel().setValueAt("CATEGORY", 0, 3);
-            this.table.getModel().setValueAt("YEAR", 0, 4);
-            this.table.getModel().setValueAt("ID_CREATOR", 0, 5);
-        }
+        pAdministrator.viewAllUsers();
     }
 
     @Override
@@ -134,15 +105,5 @@ public class AllView extends JFrame implements IAll {
         this.table.getModel().setValueAt(user.getUsername(), row, 2);
         this.table.getModel().setValueAt(user.getPassword(), row, 3);
         this.table.getModel().setValueAt(user.getRole().toString(), row, 4);
-    }
-
-    @Override
-    public void setMovieInTable(int row, Movie movie) {
-        this.table.getModel().setValueAt(movie.getID(), row, 0);
-        this.table.getModel().setValueAt(movie.getName(), row, 1);
-        this.table.getModel().setValueAt(movie.getType().toString(), row, 2);
-        this.table.getModel().setValueAt(movie.getCategory(), row, 3);
-        this.table.getModel().setValueAt(movie.getYear(), row, 4);
-        this.table.getModel().setValueAt(movie.getIdCreator(), row, 5);
     }
 }

@@ -106,6 +106,10 @@ public class LogInView extends JFrame implements ILogIn{
                         EmployeeView employeeView = new EmployeeView(user);
                         employeeView.setVisible(true);
                     }
+                    else {
+                        ManagerView managerView = new ManagerView(user);
+                        managerView.setVisible(true);
+                    }
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "Username or password incorrect, please try again!");

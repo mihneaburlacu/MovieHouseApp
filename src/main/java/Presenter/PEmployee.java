@@ -95,46 +95,6 @@ public class PEmployee {
         dbContextMovie.updateMovie(iEmployee.getIDFromUpdateTextField(), iEmployee.getNameFromUpdateTable(), iEmployee.getTypeFromUpdateTable(), iEmployee.getCategoryFromUpdateTable(), iEmployee.getYearFromUpdateTable());
     }
 
-    public List<Movie> viewAllMovies() {
-        List<Movie> list = dbContextMovie.findAllMovies(dbContextMovie.createFindAllQuery());
-
-        System.out.println(list);
-
-        list.sort(new MovieComparator());
-
-        int nr = 1;
-        for(Movie m : list) {
-            iAll.setMovieInTable(nr, m);
-            nr++;
-        }
-
-        return list;
-    }
-
-    public List<Movie> filterMovies() {
-        String select = iEmployee.getFilterFromComboBox();
-        String got = iEmployee.getFilterTextField();
-        List<Movie> list = new ArrayList<>();
-
-        if(select == "TYPE") {
-            list = dbContextMovie.findAllMovies(dbContextMovie.createFindByTypeQuery(got));
-        }
-        else if(select == "CATEGORY"){
-            list = dbContextMovie.findAllMovies(dbContextMovie.createFindByCategoryQuery(got));
-        }
-        else {
-            list = dbContextMovie.findAllMovies(dbContextMovie.createFindByYearQuery(Integer.parseInt(got)));
-        }
-
-        int nr = 1;
-        for(Movie m : list) {
-            iAll.setMovieInTable(nr, m);
-            nr++;
-        }
-
-        return list;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -4,6 +4,7 @@ import Model.Enums.Role;
 import Model.User;
 import Presenter.PAdministrator;
 import Presenter.PEmployee;
+import Presenter.PManager;
 
 import java.awt.*;
 
@@ -294,26 +295,6 @@ public class AdministratorView extends JFrame implements IAdministrator{
                     System.out.println("Error while updating the user");
                     showMessage("Error while updating the user");
                 }
-            }
-        });
-
-        addDeleteListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    pAdministrator.deleteUser();
-                } catch(Error error) {
-                    System.out.println("Error while deleting the user");
-                    showMessage("Error while deleting the user");
-                }
-            }
-        });
-
-        addViewAllListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AllView allUsersView = new AllView(pAdministrator, new PEmployee(), "ADMINISTRATOR", "");
-                allUsersView.setVisible(true);
             }
         });
     }

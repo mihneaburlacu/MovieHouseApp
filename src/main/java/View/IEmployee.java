@@ -6,7 +6,7 @@ import Model.User;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public interface IEmployee {
+public interface IEmployee{
     Movie getMovieFromCreateTable(int idCreator);
     String getNameFromReadTextField();
     String getIDFromReadTextField();
@@ -18,16 +18,11 @@ public interface IEmployee {
     int getYearFromUpdateTable();
     String getNameFromDeleteTextField();
     String getIDFromDeleteTextField();
-    String getFilterFromComboBox();
-    String getFilterTextField();
     void addCreateButton(ActionListener actionListener);
     void addReadButton(ActionListener actionListener);
     void addUpdateButton(ActionListener actionListener);
     void addDeleteButton(ActionListener actionListener);
-    void addViewButton(ActionListener actionListener);
-    void addFilterButton(ActionListener actionListener);
     void setUsernameToInsertLabel(String username);
     void showMessage(String message);
-    void filterFunction();
-    void viewFunction();
+    void addViewButton(ActionListener actionListener);
 }
