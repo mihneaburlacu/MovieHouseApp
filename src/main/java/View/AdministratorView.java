@@ -297,6 +297,26 @@ public class AdministratorView extends JFrame implements IAdministrator{
                 }
             }
         });
+
+        addDeleteListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    pAdministrator.deleteUser();
+                } catch(Exception exp) {
+                    System.out.println("Exception while deleting user");
+                    showMessage("Exception while deleting user");
+                }
+            }
+        });
+
+        addViewAllListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AllView allView = new AllView(pAdministrator);
+                allView.setVisible(true);
+            }
+        });
     }
 
     @Override

@@ -21,7 +21,7 @@ public class ConnectionFactory {
         }
     }
 
-    private Connection createConnection() {
+    public static Connection createConnection() {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(DBURL, USER, PASS);

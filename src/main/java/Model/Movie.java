@@ -79,7 +79,7 @@ public class Movie {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Movie film = (Movie) o;
-        return ID == film.ID && year == film.year && Objects.equals(name, film.name) && Objects.equals(type, film.type) && category == film.category;
+        return ID == film.ID && year == film.year && name.equals(film.name) && type == film.type && category.equals(film.category) && idCreator == film.idCreator;
     }
 
     @Override

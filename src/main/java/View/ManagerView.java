@@ -3,9 +3,7 @@ package View;
 import Model.User;
 import Presenter.PManager;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -44,7 +42,8 @@ public class ManagerView extends JFrame implements IManager {
      * Create the frame.
      */
     public ManagerView(User user) {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setName("MovieHouse - Manager");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 560, 410);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -59,6 +58,7 @@ public class ManagerView extends JFrame implements IManager {
         insertUsernameLabel = new JLabel("");
         insertUsernameLabel.setFont(new Font("Times New Roman", Font.BOLD, 24));
         insertUsernameLabel.setBounds(263, 10, 130, 37);
+        insertUsernameLabel.setForeground(Color.GREEN);
         contentPane.add(insertUsernameLabel);
 
         JLabel viewLabel = new JLabel("View all movies sorted by type and by year");
@@ -78,6 +78,8 @@ public class ManagerView extends JFrame implements IManager {
 
         pManager = new PManager(this);
         pManager.openViewAndFilter();
+
+        insertUsernameLabel.setText(user.getUsername());
 
     }
 
